@@ -5,8 +5,6 @@ Oauth2 Password Gateway is an OAuth2 authorization service that implements "Reso
 
 Project Goal
 --------------
-
-
 In [section 4.3](http://tools.ietf.org/html/rfc6749#section-4.3) of the OAuth 2.0 spec you'll find the specification for the    "Resource Owner Password Credentials Grant" -- including the following introductory paragraph:
 
 > The grant type is suitable for clients capable of obtaining the
