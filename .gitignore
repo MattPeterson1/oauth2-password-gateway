@@ -3,3 +3,4 @@ target
 .project
 .classpath
 README.md~
+src/main/webapp/WEB-INF/web.xml.prod
