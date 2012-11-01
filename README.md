@@ -26,10 +26,8 @@ If you don't enjoy reading IETF RFC specs, the next best way to learn about the 
 
 [Click here to try it now](https://oauth2-password-gateway.herokuapp.com/) 
 
-
 Setup your own OAuth2 Password Gateway
 --------------------------------------
-
 1) Clone the repo: `git clone git://github.com/quest/oauth2-password-gateway`
 
 2) Edit the /src/main/webapp/WEB-INF/web.xml file to add your own `client_id`, `client_secret`, and `redirect_uri` values to the servlet init-params.
