@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    version="2.5">
+    
+  <servlet>
+        <servlet-name>OAuth2CallbackServlet</servlet-name>
+        <servlet-class>
+            com.quest.oauth2.passwdgateway.web.OAuth2CallbackServlet
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OAuth2CallbackServlet</servlet-name>
+        <!--IMPORTANT: Use this value as the path portion of the redirect_url when configuring
+            as a client for the various OAuth services. -->
+        <url-pattern>/oauth2callback</url-pattern>
+    </servlet-mapping>    
+    
+    <servlet>
+        <servlet-name>GoogleAuthcode2ResownerServlet</servlet-name>
+        <servlet-class>
+             com.quest.oauth2.passwdgateway.web.GoogleAuthcode2ResownerServlet
+        </servlet-class>
+        <init-param>
+            <param-name>display_name</param-name>
+            <param-value>Google</param-value>            
+        </init-param>
+        <init-param>
+            <param-name>client_id</param-name>
+            <param-value>PUT YOUR CLIENT ID HERE</param-value>            
+        </init-param>
+        <init-param>
+            <param-name>client_secret</param-name>
+            <param-value>PUT YOUR CLIENT SECRET HERE</param-value>            
+        </init-param>
+        <init-param>
+            <param-name>redirect_uri</param-name>            
+            <param-value>https://<PUT YOUR HOSTNAME HERE/oauth2callback</param-value>            
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GoogleAuthcode2ResownerServlet</servlet-name>
+        <url-pattern>/oauth2/google</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>FacebookAuthcode2ResownerServlet</servlet-name>
+        <servlet-class>
+             com.quest.oauth2.passwdgateway.web.FacebookAuthcode2ResownerServlet
+        </servlet-class>
+        <init-param>
+            <param-name>display_name</param-name>
+            <param-value>Facebook</param-value>            
+        </init-param>
+        <init-param>
+            <param-name>client_id</param-name>
+            <param-value>PUT YOUR CLIENT ID HERE</param-value>            
+        </init-param>
+        <init-param>
+            <param-name>client_secret</param-name>
+            <param-value>PUT YOUR CLIENT SECRET HERE</param-value>            
+        </init-param>
+        <init-param>
+            <param-name>redirect_uri</param-name>            
+            <param-value>https://PUT YOUR HOSTNAME HERE/oauth2callback</param-value>            
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FacebookAuthcode2ResownerServlet</servlet-name>
+        <url-pattern>/oauth2/facebook</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>LiveAuthcode2ResownerServlet</servlet-name>
+        <servlet-class>
+             com.quest.oauth2.passwdgateway.web.LiveAuthcode2ResownerServlet
+        </servlet-class>
+        <init-param>
+            <param-name>display_name</param-name>
+            <param-value>Microsoft Live</param-value>            
+        </init-param>
+        <init-param>
+            <param-name>client_id</param-name>
+            <param-value>PUT YOUR CLIENT ID HERE</param-value>
+        </init-param>
+        <init-param>
+            <param-name>client_secret</param-name>
+            <param-value>PUT YOUR CLIENT SECRET HERE</param-value>            
+        </init-param>
+        <init-param>
+            <param-name>redirect_uri</param-name>            
+            <param-value>https://PUT YOUR HOSTNAME HERE/oauth2callback</param-value>                        
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LiveAuthcode2ResownerServlet</servlet-name>
+        <url-pattern>/oauth2/live</url-pattern>
+    </servlet-mapping>    
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
+</web-app>
