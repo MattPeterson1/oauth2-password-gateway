@@ -52,8 +52,6 @@
           </thead>
           <tbody>
 <% 
-String base = request.getRequestURL().toString();
-base = base.substring(0,base.lastIndexOf('/'));
 ServletContext context = getServletContext();
 for(ServletRegistration r : context.getServletRegistrations().values())
 {
@@ -73,7 +71,7 @@ for(ServletRegistration r : context.getServletRegistrations().values())
 	    out.println("<tr class=\""+configStyle +"\"/>");
 	    out.println("<td>"+name+"</td>");
 	    out.print("<td class=\"endpoint\">");
-	    out.println( base + r.getMappings().iterator().next() );
+	    out.println( r.getMappings().iterator().next() );
 		
 	    out.println("</td>");
 	    out.println("<td>"+configHtml+"</td>");
@@ -259,8 +257,7 @@ Content-Type: application/json
               
              </div>
              
-        </div>
-        
+        </div>        
         
         <div id="checkResponse" hidden="hidden">
           <div class="row">
@@ -465,14 +462,19 @@ Content-Type: application/json
      }
    }
 
-   $(document).ready(function () {
-
+   $(document).ready(function () {	   
      $('#navHome').addClass("active");
-
+     
+     $('td.endpoint').each(function(){
+    	 var base = document.URL.substring(0,document.URL.lastIndexOf('/'));
+    	 var endpoint = $(this).html();
+    	 $(this).html(base + endpoint);
+     });
+     
      $('#endpointsTable').find('button').click(function () {
-       opg.endpoint = $(this).parents('tr').find('td.endpoint').html();
+       var endpoint = $(this).parents('tr').find('td.endpoint').html();       
        opg.className = $(this).parents('tr').find('td.className').html();
-       $('#endpoint').val(opg.endpoint);
+       $('#endpoint').val(endpoint);
        $('#buildRequest').show();
        $('#postRequest').show();
        setScope();
@@ -486,10 +488,10 @@ Content-Type: application/json
        updatePostMessage();
      });
 
-     $('#curlButton').click(function () {
+     $('#curlButton').click(function () {       
        hideEverything();
-
-       $('#commandLine').text("'curl --data '" + getPostMessage(false) + "' " + opg.endpoint);
+       		
+       $('#commandLine').text("curl --data '" + getPostMessage(false) + "' " + $('#endpoint').val());
 
        $('#cutNPaste').show();
        $('#useAccessCode').show();
@@ -497,21 +499,19 @@ Content-Type: application/json
      });
 
      $('#wgetButton').click(function () {
-       hideEverything();
-
-       $('#commandLine').text("wget -qO- --post-data '" + getPostMessage(false) + "' " + opg.endpoint);
+         hideEverything();
+       $('#commandLine').text("wget -qO- --post-data '" + getPostMessage(false) + "' " + $('#endpoint').val());
 
        $('#cutNPaste').show();
        $('#useAccessCode').show();
        $('#cutNPaste').scrollTo();
      });
 
-
      $('#submitButton').click(function () {
        hideEverything();
        $.ajax({
          type: "post",
-         url: opg.endpoint,
+         url: $('#endpoint').val(),
          data: getPostMessage(false),
          success: function (data, text) {
            setResponse(200, "OK", JSON.stringify(data, undefined, 4));
