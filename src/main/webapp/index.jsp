@@ -12,8 +12,7 @@
       body {
         padding-top: 60px;
         /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-      
+      }      
       
       .custom {
         width: 480px;
@@ -490,7 +489,7 @@ Content-Type: application/json
      $('#curlButton').click(function () {
        hideEverything();
 
-       $('#commandLine').text('curl --data "' + getPostMessage(false) + '" ' + opg.endpoint);
+       $('#commandLine').text("'curl --data '" + getPostMessage(false) + "' " + opg.endpoint);
 
        $('#cutNPaste').show();
        $('#useAccessCode').show();
@@ -500,7 +499,7 @@ Content-Type: application/json
      $('#wgetButton').click(function () {
        hideEverything();
 
-       $('#commandLine').text('wget -qO- --post-data "' + getPostMessage(false) + '" ' + opg.endpoint);
+       $('#commandLine').text("wget -qO- --post-data '" + getPostMessage(false) + "' " + opg.endpoint);
 
        $('#cutNPaste').show();
        $('#useAccessCode').show();
